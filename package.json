@@ -2,9 +2,17 @@
   "name": "@vtfk/react-msal",
   "version": "0.1.0",
   "description": "MSAL React hook",
-  "author": "matsand",
   "license": "MIT",
-  "repository": "vtfk/react-msal",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vtfk/react-msal.git"
+  },
+  "keywords": [],
+  "author": "Mats Andreassen <matsand@live.no> (https://github.com/matsand)",
+  "bugs": {
+    "url": "https://github.com/vtfk/react-msal/issues"
+  },
+  "homepage": "https://github.com/vtfk/react-msal#readme",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
