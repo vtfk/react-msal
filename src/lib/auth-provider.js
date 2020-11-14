@@ -141,7 +141,7 @@ export const MsalProvider = ({
     }
     }, []) // eslint-disable-line
 
-  const login = async (loginRequest, method) => {
+  const login = async (loginRequest, method = 'loginRedirect') => {
     console.log('login')
     if (!publicClient) return null
     const signInType = (isIE || isEdge) ? 'loginRedirect' : method
