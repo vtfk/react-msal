@@ -16,7 +16,6 @@ export const MsalProvider = ({
   const mockUser = config.mockUser || defaultConfig.mockUser
   const userInfoUrl = config.userInfoUrl || defaultConfig.userInfoUrl
   const loginScopes = scopes || config.scopes || defaultConfig.scopes
-  const postLogoutRedirectUri = config.auth.postLogoutRedirectUri || defaultConfig.auth.postLogoutRedirectUri
 
   const ua = window.navigator.userAgent
   const msie = ua.indexOf('MSIE ')
