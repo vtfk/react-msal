@@ -267,6 +267,7 @@ export const MsalProvider = ({
         authStatus,
         user,
         token,
+        idToken,
         popupOpen,
         loginError,
         login,
