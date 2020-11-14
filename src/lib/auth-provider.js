@@ -16,6 +16,7 @@ export const MsalProvider = ({
   const mockUser = config.mockUser || defaultConfig.mockUser
   const userInfoUrl = config.userInfoUrl || defaultConfig.userInfoUrl
   const loginScopes = scopes || config.scopes || defaultConfig.scopes
+  const postLogoutRedirectUri = config.auth.postLogoutRedirectUri || defaultConfig.auth.postLogoutRedirectUri
 
   const ua = window.navigator.userAgent
   const msie = ua.indexOf('MSIE ')
@@ -79,7 +80,7 @@ export const MsalProvider = ({
   async function updateToken (user) {
     console.log('updateToken')
     if (!publicClient) return false
-    const response = await publicClient.acquireTokenSilent({ account: user.username, scopes: loginScopes })
+    const response = await publicClient.acquireTokenSilent({ account: user.username, ...loginScopes })
     await saveUserdata(response, user)
   }
 
