@@ -31,7 +31,7 @@
     "microbundle-crl": "0.13.11",
     "babel-eslint": "10.1.0",
     "cross-env": "7.0.2",
-    "eslint": "6.8.0",
+    "eslint": "7.13.0",
     "eslint-config-prettier": "6.15.0",
     "eslint-config-standard": "14.1.1",
     "eslint-config-standard-react": "11.0.1",
