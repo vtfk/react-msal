@@ -1,4 +1,4 @@
-# react-msal
+# @vtfk/react-msal
 
 > MSAL React hook
 
@@ -13,16 +13,8 @@ npm install --save @vtfk/react-msal
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
+// TODO: Add usage example
 
-import MyComponent from 'react-msal'
-import 'react-msal/dist/index.css'
-
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
-}
 ```
 
 ## License
