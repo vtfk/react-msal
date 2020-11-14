@@ -24,7 +24,8 @@ export const MsalProvider = ({
   const isIE = msie > 0 || msie11 > 0
   const isEdge = msedge > 0
 
-  const [auth, setAuth] = useSessionStorage('MSAL-AUTH', {
+  const sessionKey = 'MSAL-AUTH'
+  const [auth, setAuth] = useSessionStorage(sessionKey, {
     isAuthenticated: isMock,
     user: false,
     token: false,
@@ -170,8 +171,10 @@ export const MsalProvider = ({
 
   const logout = () => {
     console.log('logout')
-    window.sessionStorage.clear()
-    return publicClient.logout()
+    window.sessionStorage.removeItem(sessionKey)
+
+    const account = publicClient.getAccountByHomeId(user.homeAccountId) || undefined
+    publicClient.logout({ account, postLogoutRedirectUri })
   }
 
   const getTokenPopup = async (loginRequest) => {
