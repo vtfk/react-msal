@@ -171,9 +171,8 @@ export const MsalProvider = ({
 
   const logout = () => {
     console.log('logout')
-    setAuth({ isAuthenticated: true, authStatus: 'logout' })
-    publicClient.logout({ account: user, postLogoutRedirectUri: postLogoutRedirectUri })
-    return true
+    window.sessionStorage.clear()
+    return publicClient.logout()
   }
 
   const getTokenPopup = async (loginRequest) => {
