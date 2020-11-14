@@ -1,7 +1,13 @@
-import { ExampleComponent } from '.'
+import { MsalProvider, useSession } from '.'
 
-describe('ExampleComponent', () => {
+describe('MsalProvider loads correctly', () => {
   it('is truthy', () => {
-    expect(ExampleComponent).toBeTruthy()
+    expect(MsalProvider).toBeTruthy()
+  })
+})
+
+describe('useSession loads correctly', () => {
+  it('is truthy', () => {
+    expect(useSession).toBeTruthy()
   })
 })
