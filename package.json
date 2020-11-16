@@ -1,7 +1,7 @@
 {
   "name": "@vtfk/react-msal",
   "version": "1.0.0",
-  "description": "MSAL React hook",
+  "description": "MSAL/Azure React hook",
   "license": "MIT",
   "repository": {
     "type": "git",
