@@ -1,9 +1,9 @@
-name: Publish to NPM
+name: Publish to Github Pages
 
 on:
   workflow_dispatch:
   release:
-    types: [created]
+    types: [published]
 
 jobs:
   build:
@@ -26,6 +26,7 @@ jobs:
           node-version: 12
       - run: npm ci
       - run: npm run build --if-present
-      - uses: JS-DevTools/npm-publish@v1
+      - uses: peaceiris/actions-gh-pages@v3
         with:
-          token: ${{ secrets.NPM_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./example/build
