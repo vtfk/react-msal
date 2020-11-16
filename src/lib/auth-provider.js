@@ -167,6 +167,7 @@ export const MsalProvider = ({
     if (isMock) {
       console.log('mock logout')
       window.sessionStorage.clear()
+      window.location.replace(postLogoutRedirectUri)
       return
     }
 
