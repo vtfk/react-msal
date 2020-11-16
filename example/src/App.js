@@ -5,9 +5,7 @@ import { loginRequest } from './config'
 const keyTable = (obj) => {
   const tableRows = []
   for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      tableRows.push({ key, value: obj[key] })
-    }
+    tableRows.push({ key, value: obj[key] })
   }
 
   return (

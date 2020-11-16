@@ -1,3 +1,14 @@
+const defaultMockUser = {
+  displayName: 'Trine Testesen',
+  givenName: 'Trine',
+  name: 'Trine Testesen',
+  onPremisesSamAccountName: 'tri0308',
+  surname: 'Testesen',
+  tenantId: '08f3813c-9f29-482f-9aec-16ef7cbf477a',
+  userPrincipalName: 'trine.testesen@vtfk.no',
+  username: 'trine.testesen@vtfk.no'
+}
+
 export default {
   auth: {
     clientId: process.env.AUTH_CLIENT_ID,
@@ -11,14 +22,5 @@ export default {
   },
   userInfoUrl: process.env.AUTH_USER_INFO_URL || 'https://graph.microsoft.com/v1.0/me?$select=userPrincipalName,onPremisesSamaccountName,givenName,surname,displayName',
   isMock: process.env.AUTH_IS_MOCK || process.env.REACT_APP_IS_MOCK || false,
-  mockUser: process.env.AUTH_MOCK_USER ? JSON.parse(process.env.AUTH_MOCK_USER) : {
-    displayName: 'Trine Testesen',
-    givenName: 'Trine',
-    name: 'Trine Testesen',
-    onPremisesSamAccountName: 'tri0308',
-    surname: 'Testesen',
-    tenantId: '08f3813c-9f29-482f-9aec-16ef7cbf477a',
-    userPrincipalName: 'trine.testesen@vtfk.no',
-    username: 'trine.testesen@vtfk.no'
-  }
+  mockUser: process.env.AUTH_MOCK_USER ? JSON.parse(process.env.AUTH_MOCK_USER) : defaultMockUser
 }
