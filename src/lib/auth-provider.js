@@ -164,9 +164,14 @@ export const MsalProvider = ({
   }
 
   const logout = () => {
-    window.sessionStorage.removeItem(sessionKey)
+    if(isMock) {
+      console.log('mock logout')
+      window.sessionStorage.clear()
+      return
+    }
 
-    const account = publicClient.getAccountByHomeId(user.homeAccountId) || undefined
+    window.sessionStorage.removeItem(sessionKey)
+    const account = user.homeAccountId ? publicClient.getAccountByHomeId(user.homeAccountId) || undefined
     publicClient.logout({ account, postLogoutRedirectUri })
   }
 
