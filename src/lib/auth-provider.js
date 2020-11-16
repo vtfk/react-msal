@@ -41,7 +41,6 @@ export const MsalProvider = ({
   const { isAuthenticated, user, token, idToken, expires, authStatus } = auth
 
   const getUserInfo = async token => {
-    console.log('getUserInfo')
     axios.defaults.headers.common.Authorization = `Bearer ${token}`
     try {
       const { data } = await axios.get(userInfoUrl)
@@ -53,13 +52,11 @@ export const MsalProvider = ({
   }
 
   async function updateUserInfo (token, user) {
-    console.log('updateUserInfo')
     const userInfo = await getUserInfo(token)
     return { ...user, ...userInfo }
   }
 
   async function saveUserdata (response, user) {
-    console.log('saveUserdata')
     const token = response.accessToken
     const idToken = response.idToken
     const expires = new Date(response.expiresOn).getTime()
@@ -78,14 +75,12 @@ export const MsalProvider = ({
   }
 
   async function updateToken (user) {
-    console.log('updateToken')
     if (!publicClient) return false
     const response = await publicClient.acquireTokenSilent({ account: user.username, ...loginScopes })
     await saveUserdata(response, user)
   }
 
   useEffect(() => {
-    console.log('ue-!mock')
     if (!isMock) {
       const pc = new msal.PublicClientApplication(config || defaultConfig)
       setPublicClient(pc)
@@ -104,7 +99,7 @@ export const MsalProvider = ({
       }).catch(error => {
         const copyAuth = { ...auth }
         setAuth({ ...copyAuth, authStatus: 'rejected' })
-        console.log(error)
+        console.error(error)
         setLoginError(error)
       })
 
@@ -125,7 +120,6 @@ export const MsalProvider = ({
   }, [])
 
   useEffect(() => {
-    console.log('ue-mock')
     if (isMock) {
       const now = new Date()
       now.setDate(now.getDate() + 24)
@@ -144,7 +138,6 @@ export const MsalProvider = ({
     }, []) // eslint-disable-line
 
   const login = async (loginRequest, method = 'loginRedirect') => {
-    console.log('login')
     if (!publicClient) return null
     const signInType = (isIE || isEdge) ? 'loginRedirect' : method
 
@@ -158,7 +151,7 @@ export const MsalProvider = ({
           updateToken(publicClient.getAccount())
         }
       } catch (error) {
-        console.log(error)
+        console.error(error)
         setLoginError(error)
       } finally {
         setPopupOpen(false)
@@ -171,7 +164,6 @@ export const MsalProvider = ({
   }
 
   const logout = () => {
-    console.log('logout')
     window.sessionStorage.removeItem(sessionKey)
 
     const account = publicClient.getAccountByHomeId(user.homeAccountId) || undefined
@@ -179,7 +171,6 @@ export const MsalProvider = ({
   }
 
   const getTokenPopup = async (loginRequest) => {
-    console.log('getTokenPopup')
     try {
       const response = await publicClient.acquireTokenSilent(loginRequest)
       saveUserdata(response.accessToken, user)
@@ -199,7 +190,6 @@ export const MsalProvider = ({
 
   // This function can be removed if you do not need to support IE
   const getTokenRedirect = async (loginRequest) => {
-    console.log('getTokenRedirect')
     const copyAuth = { ...auth }
     setAuth({ ...copyAuth, authStatus: 'pending' })
     try {
@@ -218,7 +208,6 @@ export const MsalProvider = ({
   }
 
   const getToken = async (loginRequest, method) => {
-    console.log('getToken')
     const signInType = (isIE || isEdge) ? 'loginRedirect' : method
     if (signInType === 'loginRedirect') {
       return await getTokenRedirect(loginRequest)
