@@ -258,6 +258,7 @@ export const MsalProvider = ({
   const apiGet = url => retry(() => axios.get(url))
   const apiPost = (url, payload) => retry(() => axios.post(url, payload))
   const apiPut = (url, payload) => retry(() => axios.put(url, payload))
+  const apiDelete = url => retry(() => axios.delete(url))
 
   return (
     <MsalContext.Provider
@@ -274,7 +275,8 @@ export const MsalProvider = ({
         getToken,
         apiGet,
         apiPost,
-        apiPut
+        apiPut,
+        apiDelete
       }}
     >
       {children}
