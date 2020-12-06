@@ -121,7 +121,12 @@ const App = () => {
       <li>url (string) <i>(required)</i></li> 
       <li>data  <i>(required)</i></ul>
   </details>
-
+- `apiDelete` (function) - deletes data from provided URL using the users id_token
+  <details>
+    <summary>Parameters</summary>
+    <ul>
+      <li>url (string) <i>(required)</i></li> 
+  </details>
 
 #### User object
 
