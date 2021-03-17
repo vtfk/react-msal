@@ -1,6 +1,6 @@
 {
   "name": "@vtfk/react-msal",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "MSAL/Azure React authentication hook",
   "license": "MIT",
   "repository": {
