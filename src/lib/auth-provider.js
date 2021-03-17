@@ -90,8 +90,8 @@ export const MsalProvider = ({
       setAuth({ ...copyAuth, authStatus: 'pending' })
       pc.handleRedirectPromise().then((response) => {
         if (response) {
-          const account = pc.getAllAccounts()[0]
-          saveUserdata(response, account)
+          const accounts = pc.getAllAccounts()
+          if (accounts && accounts.length > 0) saveUserdata(response, accounts[0])
         } else {
           const copyAuth = { ...auth }
           setAuth({ ...copyAuth, authStatus: 'finished' })
@@ -103,13 +103,14 @@ export const MsalProvider = ({
         setLoginError(error)
       })
 
+      const accounts = pc.getAllAccounts()
+
       // Dersom bruker er innlogget fra tidligere
-      if (pc.getAllAccounts().length > 0) {
-        const account = pc.getAllAccounts()[0]
+      if (accounts && accounts.length > 0) {
         const copyAuth = { ...auth }
         setAuth({ ...copyAuth, authStatus: 'pending' })
         if (!token) {
-          updateToken(account)
+          updateToken(accounts[0])
         } else {
           const copyAuth = { ...auth }
           setAuth({ ...copyAuth, isAuthenticated: token && expires > new Date().getTime(), authStatus: 'finished' })
@@ -147,8 +148,8 @@ export const MsalProvider = ({
         const copyAuth = { ...auth }
         setAuth({ ...copyAuth, authStatus: 'pending' })
         await publicClient.loginPopup(loginRequest)
-        const account = publicClient.getAccount()
-        if (account) await updateToken(account)
+        const accounts = publicClient.getAllAccounts()
+        if (accounts && accounts.length > 0) await updateToken(accounts[0])
       } catch (error) {
         console.error(error)
         setLoginError(error)
@@ -175,7 +176,7 @@ export const MsalProvider = ({
     publicClient.logout({ account, postLogoutRedirectUri })
   }
 
-  const getTokenPopup = async (loginRequest) => {
+  const getTokenPopup = async loginRequest => {
     try {
       const response = await publicClient.acquireTokenSilent(loginRequest)
       saveUserdata(response.accessToken, user)
@@ -194,7 +195,7 @@ export const MsalProvider = ({
   }
 
   // This function can be removed if you do not need to support IE
-  const getTokenRedirect = async (loginRequest) => {
+  const getTokenRedirect = async loginRequest => {
     const copyAuth = { ...auth }
     setAuth({ ...copyAuth, authStatus: 'pending' })
     try {
@@ -212,12 +213,9 @@ export const MsalProvider = ({
     }
   }
 
-  const getToken = async (loginRequest) => {
-    if (isIE || isEdge) {
-      return await getTokenRedirect(loginRequest)
-    } else {
-      return await getTokenPopup(loginRequest)
-    }
+  const getToken = async loginRequest => {
+    if (isIE || isEdge) return await getTokenRedirect(loginRequest)
+    return await getTokenPopup(loginRequest)
   }
 
   // Implementerer api kall
@@ -232,8 +230,8 @@ export const MsalProvider = ({
         return data
       } catch (error) {
         if (is401(error)) {
-          const account = publicClient.getAccount()
-          if (account) await updateToken(account)
+          const accounts = publicClient.getAllAccounts()
+          if (accounts && accounts.length > 0) await updateToken(accounts[0])
 
           axios.defaults.headers.common.Authorization = `Bearer ${idToken}`
           try {
@@ -250,8 +248,8 @@ export const MsalProvider = ({
       }
     } else {
       console.warn('invalid or expired token')
-      const account = publicClient.getAccount()
-      if (account) await updateToken(account)
+      const accounts = publicClient.getAllAccounts()
+      if (accounts && accounts.length > 0) await updateToken(accounts[0])
 
       return func()
     }
