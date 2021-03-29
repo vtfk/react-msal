@@ -21,6 +21,6 @@ export default {
     storeAuthStateInCookie: process.env.AUTH_STATE_IN_COOKIE === 'true' || false
   },
   userInfoUrl: process.env.AUTH_USER_INFO_URL || 'https://graph.microsoft.com/v1.0/me?$select=userPrincipalName,onPremisesSamaccountName,givenName,surname,displayName',
-  isMock: process.env.AUTH_IS_MOCK || process.env.REACT_APP_IS_MOCK || false,
+  isMock: (process.env.AUTH_IS_MOCK && process.env.AUTH_IS_MOCK === 'true') || (process.env.REACT_APP_IS_MOCK && process.env.REACT_APP_IS_MOCK === 'true') || false,
   mockUser: process.env.AUTH_MOCK_USER ? JSON.parse(process.env.AUTH_MOCK_USER) : defaultMockUser
 }
