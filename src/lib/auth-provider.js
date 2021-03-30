@@ -222,12 +222,12 @@ export const MsalProvider = ({
   const is401 = error => /401/.test(error.message)
   const isValid = (token, expires) => token && expires > new Date().getTime()
 
-  const retry = async func => {
+  const retry = async (func, returnFullResponse) => {
     if (isValid(idToken, expires)) {
       axios.defaults.headers.common.Authorization = `Bearer ${idToken}`
       try {
-        const { data } = await func()
-        return data
+        const res = await func()
+        return !returnFullResponse ? res.data : res
       } catch (error) {
         if (is401(error)) {
           const accounts = publicClient.getAllAccounts()
@@ -235,8 +235,8 @@ export const MsalProvider = ({
 
           axios.defaults.headers.common.Authorization = `Bearer ${idToken}`
           try {
-            const { data } = await func()
-            return data
+            const res = await func()
+            return !returnFullResponse ? res.data : res
           } catch (error) {
             console.error(error)
             return false
@@ -255,10 +255,10 @@ export const MsalProvider = ({
     }
   }
 
-  const apiGet = url => retry(() => axios.get(url))
-  const apiPost = (url, payload) => retry(() => axios.post(url, payload))
-  const apiPut = (url, payload) => retry(() => axios.put(url, payload))
-  const apiDelete = url => retry(() => axios.delete(url))
+  const apiGet = (url, returnFullResponse = false) => retry(() => axios.get(url), returnFullResponse)
+  const apiPost = (url, payload, returnFullResponse = false) => retry(() => axios.post(url, payload), returnFullResponse)
+  const apiPut = (url, payload, returnFullResponse = false) => retry(() => axios.put(url, payload), returnFullResponse)
+  const apiDelete = (url, returnFullResponse = false) => retry(() => axios.delete(url), returnFullResponse)
 
   return (
     <MsalContext.Provider

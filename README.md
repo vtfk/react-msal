@@ -105,26 +105,34 @@ const App = () => {
     <summary>Parameters</summary>
     <ul>
       <li>url (string) <i>(required)</i></li>
+      <li>returnFullResponse (bool) <i>(optional) <b>default = false</b></li>
+    </ul>
   </details>
 - `apiPost` (function) - posts the provided data to the URL using the users id_token
   <details>
     <summary>Parameters</summary>
     <ul>
       <li>url (string) <i>(required)</i></li>
-      <li>data  <i>(required)</i></ul>
+      <li>data  <i>(required)</i>
+      <li>returnFullResponse (bool) <i>(optional) <b>default = false</b></li>
+    </ul>
   </details>
 - `apiPut` (function) - updates/put the provided data to the URL using the users id_token
   <details>
     <summary>Parameters</summary>
     <ul>
       <li>url (string) <i>(required)</i></li>
-      <li>data  <i>(required)</i></ul>
+      <li>data  <i>(required)</i>
+      <li>returnFullResponse (bool) <i>(optional) <b>default = false</b></li>
+    </ul>
   </details>
 - `apiDelete` (function) - deletes data from provided URL using the users id_token
   <details>
     <summary>Parameters</summary>
     <ul>
       <li>url (string) <i>(required)</i></li>
+      <li>returnFullResponse (bool) <i>(optional) <b>default = false</b></li>
+    </ul>
   </details>
 
 #### User object
