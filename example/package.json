@@ -11,10 +11,10 @@
     "refresh": "rm -rf node_modules && rm package-lock.json && npm i"
   },
   "dependencies": {
+    "@vtfk/react-msal": "file:..",
     "react": "file:../node_modules/react",
     "react-dom": "file:../node_modules/react-dom",
-    "react-scripts": "file:../node_modules/react-scripts",
-    "@vtfk/react-msal": "file:.."
+    "react-scripts": "file:../node_modules/react-scripts"
   },
   "browserslist": [
     ">0.2%",
