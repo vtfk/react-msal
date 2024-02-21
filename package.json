@@ -55,6 +55,6 @@
   ],
   "dependencies": {
     "@azure/msal-browser": "2.22.1",
-    "axios": "0.26.1"
+    "axios": "0.28.0"
   }
 }
